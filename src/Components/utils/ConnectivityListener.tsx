@@ -52,7 +52,7 @@ const ConnectivityListener = () => {
                 try {
                     // Start with a simpler ping - fetching favicon or base url
                     // Using no-cache to avoid false positives
-                    await fetch(`${import.meta.env.VITE_BASE_URL}/api/`, { 
+                    await fetch(`${import.meta.env.VITE_BASE_URL}/api/ping/`, { 
                         method: 'HEAD',
                         mode: 'no-cors', // We just want to see if it fails network-wise
                         cache: 'no-store'

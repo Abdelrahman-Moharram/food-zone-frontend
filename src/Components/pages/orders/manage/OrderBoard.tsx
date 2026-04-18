@@ -23,8 +23,8 @@ const OrderBoard: React.FC<Props> = ({ initialData }) => {
     if (!destination) return;
     if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
-    const sourceColIndex = board.findIndex(col => col.state.id === source.droppableId);
-    const destColIndex = board.findIndex(col => col.state.id === destination.droppableId);
+    const sourceColIndex  = board.findIndex(col => col.state.id === source.droppableId);
+    const destColIndex    = board.findIndex(col => col.state.id === destination.droppableId);
 
     if (sourceColIndex === -1 || destColIndex === -1) return;
 
@@ -83,6 +83,7 @@ const OrderBoard: React.FC<Props> = ({ initialData }) => {
             key={col.state.id}
             stateObj={col.state}
             orders={col.orders}
+            colSpan={col?.cols}
           />
         ))}
       </div>

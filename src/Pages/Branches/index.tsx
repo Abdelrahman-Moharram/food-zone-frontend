@@ -2,7 +2,7 @@ import React from 'react';
 import { PageHeader } from '../../Components/ui/Shared';
 import { ResourceCard } from '../../Components/ui/Cards';
 import { IoLocationOutline, IoCallOutline, IoMailOutline } from 'react-icons/io5';
-import { useGetResturantBranchesByCityQuery } from '../../redux/api/resturantsApi';
+import { useGetRestaurantBranchesByCityQuery } from '../../redux/api/restaurantsApi';
 import { Loading } from '../../Components/ui/Common/ImageSkeleton';
 
 interface City {
@@ -30,7 +30,7 @@ interface CityGroup {
 }
 
 const Branches = () => {
-  const { data, isLoading } = useGetResturantBranchesByCityQuery({}, { refetchOnFocus: true });
+  const { data, isLoading } = useGetRestaurantBranchesByCityQuery({}, { refetchOnFocus: true });
   const citiesData = (data as CityGroup[]) || [];
 
   const handleEdit = (id: string) => console.log('Edit branch:', id);

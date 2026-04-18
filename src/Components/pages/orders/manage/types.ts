@@ -38,6 +38,7 @@ export interface OrderData {
 }
 
 export interface BoardColumnData {
-    state: OrderStateDef;
-    orders: OrderData[];
+    state   : OrderStateDef;
+    orders  : OrderData[];
+    cols    : string
 }

@@ -20,7 +20,7 @@ const baseQuery = fetchBaseQuery({
 // Helper to check actual backend connectivity
 const pingBackend = async () => {
   try {
-    await fetch(`${import.meta.env.VITE_BASE_URL}/api/`, {
+    await fetch(`${import.meta.env.VITE_BASE_URL}/api/ping/`, {
       method: 'HEAD',
       mode: 'no-cors',
       cache: 'no-store'
@@ -127,7 +127,7 @@ export const apiSlice = createApi({
     'roles-permissions',
     'roles',
 
-    'resturants',
+    'restaurants',
     'menus',
     'orders',
     'cart',

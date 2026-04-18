@@ -3,7 +3,7 @@ import Cookies from "js-cookie"
 const colormode = Cookies.get('colormode') || 'light'
 // const isAuthenticated = Cookies.get('access_token') ? true : false
 
-interface resturantType{
+interface restaurantType{
 	id	 : string,
 	name : string,
 }
@@ -14,7 +14,7 @@ const emptyUser = {
 	full_name	: '',
 	email		: '',
 	role		: '',
-	resturant	: undefined,
+	restaurant	: undefined,
 	permissions	: []
 }
 interface user {
@@ -24,7 +24,7 @@ interface user {
 	username	: string;
 	role		: string;
 	permissions	: string[];
-	resturant?	: resturantType;
+	restaurant?	: restaurantType;
 }
 interface AuthState {
 	isAuthenticated	: boolean;

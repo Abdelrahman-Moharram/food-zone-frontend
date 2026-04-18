@@ -6,15 +6,17 @@ import { OrderStateDef, OrderData } from './types';
 import { getVariantClasses } from './utils';
 
 interface Props {
-  stateObj: OrderStateDef;
-  orders: OrderData[];
+  stateObj  : OrderStateDef;
+  orders    : OrderData[];
+  colSpan?  : string
 }
 
-const OrderColumn = ({ stateObj, orders }: Props) => {
+const OrderColumn = ({ stateObj, orders, colSpan }: Props) => {
   const { headerColor, dotColor } = getVariantClasses(stateObj.variant);
-
+  console.log({ headerColor, dotColor }, stateObj.variant);
+  
   return (
-    <div className="flex flex-col rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-50 shadow-sm">
+    <div className={`flex flex-col rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-50 shadow-sm col-span-${colSpan}`}>
       {/* Column header */}
       <div className={classNames('px-5 py-4 flex items-center gap-3 border-b border-neutral-200', headerColor)}>
         <span className={classNames('w-2.5 h-2.5 rounded-full shrink-0', dotColor)} />

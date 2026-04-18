@@ -1,14 +1,14 @@
 import { apiSlice } from "../services/apiSlice";
 
-const base_url = 'resturants/'
+const base_url = 'restaurants/'
 
-const resturantsApiSlice = apiSlice.injectEndpoints({
+const restaurantsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder)=>({
-        getResturantBranchesByCity: builder.query({
+        getRestaurantBranchesByCity: builder.query({
             query:()=>({
                 url:base_url+'branches/',
             }),
-            providesTags:['resturants']
+            providesTags:['restaurants']
         }),
         
         // ------------------------------------------------ //
@@ -20,7 +20,7 @@ const resturantsApiSlice = apiSlice.injectEndpoints({
 
 
 export const {
-    useGetResturantBranchesByCityQuery
+    useGetRestaurantBranchesByCityQuery
 
-} = resturantsApiSlice
+} = restaurantsApiSlice
 

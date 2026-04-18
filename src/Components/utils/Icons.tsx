@@ -106,8 +106,8 @@ export const ImageIcon = () =>
 export const PdfIcon = () =>
     <FaFilePdf className="text-[rgba(244,15,2)]" />
 
-export const AddIcon = ({className}:{className:string}) =>
-    <IoAdd className={"text-blue-600 "+className} />
+export const AddIcon = ({className}:{className?:string}) =>
+    <IoAdd className={"text-white "+className} />
 
 export const EditIcon = () =>
     <BiEdit className="text-green-600" />
