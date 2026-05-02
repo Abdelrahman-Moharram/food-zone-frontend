@@ -8,12 +8,14 @@ import { getVariantClasses } from './utils';
 interface Props {
   stateObj  : OrderStateDef;
   orders    : OrderData[];
-  colSpan?  : string
+  colSpan?  : string;
+  onEdit?   : (order: OrderData) => void;
+  onDelete? : (order: OrderData) => void;
 }
 
-const OrderColumn = ({ stateObj, orders, colSpan }: Props) => {
+const OrderColumn = ({ stateObj, orders, colSpan, onEdit, onDelete }: Props) => {
   const { headerColor, dotColor } = getVariantClasses(stateObj.variant);
-  console.log({ headerColor, dotColor }, stateObj.variant);
+  const isFirstState = stateObj.default === true;
   
   return (
     <div className={`flex flex-col rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-50 shadow-sm col-span-${colSpan}`}>
@@ -46,7 +48,15 @@ const OrderColumn = ({ stateObj, orders, colSpan }: Props) => {
               </div>
             )}
             {orders.map((order, index) => (
-              <OrderCard key={order.id} order={order} index={index} stateObj={stateObj} />
+              <OrderCard
+                key={order.id}
+                order={order}
+                index={index}
+                stateObj={stateObj}
+                isFirstState={isFirstState}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
             ))}
             {provided.placeholder}
           </div>

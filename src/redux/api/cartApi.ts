@@ -9,7 +9,7 @@ const cartApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: `${base_url}cart/`,
             }),
-            providesTags: ['cart']
+            providesTags: ['orders']
         }),
         
 
@@ -19,7 +19,7 @@ const cartApiSlice = apiSlice.injectEndpoints({
                 method  : 'POST',
                 body    : form
             }),
-            invalidatesTags: ['cart']
+            invalidatesTags: ['orders']
         }),
 
         updateCartItem: builder.mutation({
@@ -28,7 +28,7 @@ const cartApiSlice = apiSlice.injectEndpoints({
                 method  : 'PATCH',
                 body    :  form
             }),
-            invalidatesTags: ['cart']
+            invalidatesTags: ['orders']
         }),
 
         removeFromCart: builder.mutation({
@@ -36,7 +36,7 @@ const cartApiSlice = apiSlice.injectEndpoints({
                 url: `${base_url}cart/remove/${order_item_id}/`,
                 method: 'DELETE',
             }),
-            invalidatesTags: ['cart']
+            invalidatesTags: ['orders']
         }),
 
         

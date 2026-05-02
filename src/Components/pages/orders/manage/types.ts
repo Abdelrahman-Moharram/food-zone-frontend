@@ -4,6 +4,7 @@ export interface OrderStateDef {
     variant: string;
     order: number;
     default: boolean;
+    sound?: string | null;   // URL to a custom notification sound file
 }
 
 export interface MealSize {

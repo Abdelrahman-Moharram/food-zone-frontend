@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../Components/ui/Common/Button';
 
-const Menu = () => {
+const TempMenu = () => {
   // Sample data for the menu
   const menuItems = [
     { id: 1, name: 'Espresso', price: '$3.50', desc: 'Rich and bold single shot.' },
@@ -102,4 +102,4 @@ const Menu = () => {
   )
 }
 
-export default Menu
+export default TempMenu

@@ -5,7 +5,6 @@ const base_url = 'orders/'
 const ordersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
 
-
         listOrders: builder.query({
             query: () => ({
                 url: `${base_url}`,
@@ -20,7 +19,7 @@ const ordersApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: form
             }),
-            invalidatesTags: ['cart']
+            // No invalidatesTags — WebSocket broadcast handles cache updates
         }),
 
         updateOrderState: builder.mutation({
@@ -29,7 +28,29 @@ const ordersApiSlice = apiSlice.injectEndpoints({
                 method: 'PATCH',
                 body: { state }
             }),
-            invalidatesTags: ['orders']
+            // No invalidatesTags — WebSocket broadcast handles cache updates
+        }),
+
+        updateOrderItems: builder.mutation({
+            query: ({ order_id, items_update = [], items_delete = [], items_add = [] }: {
+                order_id: string;
+                items_update?: { id: string; count?: number; size?: string; comment?: string }[];
+                items_delete?: string[];
+                items_add?: { meal: string; size: string; count: number; comment?: string }[];
+            }) => ({
+                url: `${base_url}${order_id}/items/`,
+                method: 'PATCH',
+                body: { items_update, items_delete, items_add }
+            }),
+            // No invalidatesTags — WebSocket broadcast handles cache updates
+        }),
+
+        deleteOrder: builder.mutation({
+            query: ({ order_id }: { order_id: string }) => ({
+                url: `${base_url}${order_id}/delete/`,
+                method: 'DELETE',
+            }),
+            // No invalidatesTags — WebSocket broadcast handles cache updates
         }),
 
     })
@@ -40,4 +61,8 @@ export const {
     useListOrdersQuery,
     useCreateOrderMutation,
     useUpdateOrderStateMutation,
-} = ordersApiSlice
+    useUpdateOrderItemsMutation,
+    useDeleteOrderMutation,
+} = ordersApiSlice;
+
+export { ordersApiSlice };

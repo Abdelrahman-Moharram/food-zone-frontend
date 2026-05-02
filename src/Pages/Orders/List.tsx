@@ -9,7 +9,6 @@ import { OverLay } from '../../Components/ui/Modals';
 import { CreateOrder } from '.';
 
 const List = () => {
-  const { data, isLoading } = useListOrdersQuery(undefined)
   const {t}                 = useTranslation()
   const [open, setOpen]     = useState(false)
 
@@ -37,10 +36,7 @@ const List = () => {
             />
           </div>
         </div>
-        {isLoading
-          ? <Loading />
-          : <OrderBoard initialData={data || []} />
-        }
+        <OrderBoard />
       </div>
     </>
   )

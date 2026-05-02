@@ -7,11 +7,7 @@ const index = () => {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
         {/* Main Content */}
         <MenuSectionsList />
-
-
         <Cart />
-
-        
       </div>
     </div>
   )

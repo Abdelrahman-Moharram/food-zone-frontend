@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Draggable } from '@hello-pangea/dnd';
-import { ShoppingBag, CreditCard, Banknote, Copy, Check, Clock } from 'lucide-react';
+import { ShoppingBag, CreditCard, Banknote, Copy, Check, Clock, Pencil, Trash2 } from 'lucide-react';
 import classNames from 'classnames';
 import MealCard from './MealCard';
 import { format } from 'date-fns';
@@ -11,13 +11,16 @@ interface OrderCardProps {
   order: OrderData;
   index: number;
   stateObj: OrderStateDef;
+  isFirstState?: boolean;
+  onEdit?: (order: OrderData) => void;
+  onDelete?: (order: OrderData) => void;
 }
 
 const CopyableId: React.FC<{ id: string }> = ({ id }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (e: React.MouseEvent) => {
-    e.stopPropagation(); // prevent drag from triggering
+    e.stopPropagation();
     navigator.clipboard.writeText(id).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
@@ -39,7 +42,7 @@ const CopyableId: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
-const OrderCard: React.FC<OrderCardProps> = ({ order, index, stateObj }) => {
+const OrderCard: React.FC<OrderCardProps> = ({ order, index, stateObj, isFirstState, onEdit, onDelete }) => {
   const { badgeColor } = getVariantClasses(stateObj.variant);
 
   return (
@@ -75,12 +78,35 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, index, stateObj }) => {
                 )}
               </div>
             </div>
-            <span className={classNames(
-              'px-3 py-1 rounded-xl text-[11px] font-black uppercase tracking-widest border',
-              badgeColor
-            )}>
-              {stateObj.name}
-            </span>
+
+            <div className="flex items-center gap-2">
+              {/* Edit/Delete buttons — only on first-state orders */}
+              {isFirstState && (
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onEdit?.(order); }}
+                    className="p-2 rounded-xl hover:bg-primary-50 text-neutral-400 hover:text-primary-600 transition-colors"
+                    title="Edit order"
+                  >
+                    <Pencil className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); onDelete?.(order); }}
+                    className="p-2 rounded-xl hover:bg-red-50 text-neutral-400 hover:text-red-500 transition-colors"
+                    title="Delete order"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+
+              <span className={classNames(
+                'px-3 py-1 rounded-xl text-[11px] font-black uppercase tracking-widest border',
+                badgeColor
+              )}>
+                {stateObj.name}
+              </span>
+            </div>
           </div>
 
           {/* Meals */}

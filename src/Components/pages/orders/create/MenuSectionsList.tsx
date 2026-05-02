@@ -12,7 +12,7 @@ const MenuSectionsList = () => {
     
   return (
     <div className='flex-1'>
-        <PageHeader 
+        <PageHeader
             title="Create Order"
             subtitle={`Explore our menu and select your favorites from "${menu?.name || 'Menu'}"`}
             searchPlaceholder="Search items..."

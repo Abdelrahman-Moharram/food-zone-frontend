@@ -131,7 +131,8 @@ export const apiSlice = createApi({
     'menus',
     'orders',
     'cart',
-    'payments'
+    'payments',
+    
   ],
   endpoints: () => ({}),
 });
