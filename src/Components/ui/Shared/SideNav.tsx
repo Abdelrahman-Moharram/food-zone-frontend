@@ -1,4 +1,4 @@
-import { IoLogOut } from "react-icons/io5";
+import { IoLogOut, IoSettingsOutline } from "react-icons/io5";
 import { HomeIcon } from "../../utils/Icons";
 // import { IsAllowedPermissionOrNull } from "../../../Pages/Guards/IsAllowedPermission";
 import SideNavDropDownItem from "./SideNavDropDownItem";
@@ -34,6 +34,11 @@ export default function SideNav() {
             title:t("Order"),
             icon:<GiNotebook />,
             path:'/orders',
+        },              
+        {
+            title:t("Settings"),
+            icon:<IoSettingsOutline />,
+            path:'/settings',
         },              
     ]
     

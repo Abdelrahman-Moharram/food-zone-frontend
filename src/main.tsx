@@ -12,8 +12,8 @@ import NotAuthenticatedOrRedirect from './Pages/Guards/NotAuthenticatedOrRedirec
 import Logout from './Pages/Auth/logout.tsx'
 import NotFound from './Pages/Errors/NotFound.tsx'
 import Settings from './Pages/Settings/index.tsx'
-import UsersSettings from './Pages/Settings/users/index.tsx'
 import RolesSettings from './Pages/Settings/roles/index.tsx'
+import WorkersSettings from './Pages/Settings/workers/index.tsx'
 import { IsAllowedPermissionOrRedirect } from './Pages/Guards/IsAllowedPermission.tsx'
 import Menu from './Pages/Menu/index.tsx';
 import Branches from './Pages/Branches/index.tsx';
@@ -70,14 +70,14 @@ const router = createBrowserRouter ([
             index:true,
             element:<Settings />,
           },
-          {
-            path:'users',
-            element:(
-            <IsAllowedPermissionOrRedirect permission='permissions.users.view'>
-              <UsersSettings />
-            </IsAllowedPermissionOrRedirect>
-            )
-          },
+          // {
+          //   path:'users',
+          //   element:(
+          //   <IsAllowedPermissionOrRedirect permission='permissions.users.view'>
+          //     <UsersSettings />
+          //   </IsAllowedPermissionOrRedirect>
+          //   )
+          // },
           {
             path:'roles',
             element:
@@ -86,7 +86,15 @@ const router = createBrowserRouter ([
                 <RolesSettings />
               </IsAllowedPermissionOrRedirect>
             )
-
+          },
+          {
+            path:'workers',
+            element:
+            (
+              <IsAllowedPermissionOrRedirect permission='permissions.resurants.workers.view'>
+                <WorkersSettings />
+              </IsAllowedPermissionOrRedirect>
+            )
           },
           
          

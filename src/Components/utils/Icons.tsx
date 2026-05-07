@@ -1,5 +1,5 @@
 import { BiEdit, BiSolidDashboard } from "react-icons/bi"
-import { BsFileEarmarkImageFill } from "react-icons/bs"
+import { BsFileEarmarkImageFill, BsInfoCircle } from "react-icons/bs"
 import { FaFilePdf, FaTrash } from "react-icons/fa"
 import { ImHome3 } from "react-icons/im"
 import { IoAdd } from "react-icons/io5"
@@ -114,6 +114,9 @@ export const EditIcon = () =>
 
 export const DeleteIcon = () =>
     <FaTrash  className="text-red-600" />
+
+export const InfoIcon = () =>
+    <BsInfoCircle className="text-blue-500" />
 
 
 
