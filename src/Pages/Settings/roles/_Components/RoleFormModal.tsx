@@ -1,111 +1,92 @@
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { Save } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import Button from '../../../../Components/ui/Common/Button';
+import { FloatingInput } from '../../../../Components/ui/Forms';
+import Modal from '../../../../Components/ui/Modals/Modal';
+import { useAddRoleMutation, useEditRoleMutation } from '../../../../redux/api/rolesApi';
+import type { RoleItem } from './RoleTypes';
 
-import React, { useEffect } from 'react'
-import { toast } from 'react-toastify'
-import { useAddRoleMutation, useEditRoleMutation } from '../../../../redux/api/rolesApi'
-import { useRoles } from '../../../../Components/ui/Hooks/Auth/useRoles'
-import Button from '../../../../Components/ui/Common/Button'
-import { Input } from '../../../../Components/ui/Forms'
-import { Modal } from '../../../../Components/ui/Modals'
-import { useTranslation } from "react-i18next";
-
-
-interface Props{
-    handleToggler:()=>void,
-    open:boolean,
-    roleId?: string
+interface Props {
+  open: boolean;
+  role: RoleItem | null;
+  onClose: () => void;
 }
 
-const RoleFormModal = ({handleToggler, open, roleId}:Props) => {    
-    const {t} = useTranslation();
-    const [addRole, {isLoading}] = useAddRoleMutation()
-    const [editRole, {isLoading:editLoading}] = useEditRoleMutation()
-    const {
-        form,
-        error,
-        onChange,
-        setError,
-        setForm,
-        getAsFormData
-    } = useRoles({roleId})
+const RoleFormModal = ({ open, role, onClose }: Props) => {
+  const { t } = useTranslation();
+  const [name, setName] = useState('');
+  const [addRole, { isLoading: isAdding }] = useAddRoleMutation();
+  const [editRole, { isLoading: isEditing }] = useEditRoleMutation();
+  const isEditingRole = Boolean(role?.id);
 
-    useEffect(()=>{
-        if(!open){
-            setForm({id:'', name:''})
-        }
-    }, [open])
-    
-    
-    
-    const handleRole = () =>{
-        if(error){
-            toast.error(t("Please enter the role name correctly"))                
-            return
-        }
-        if(form.id){
-            editRole({id:form.id, form:getAsFormData()})
-            .unwrap()
-            .then(res=>{
-                handleToggler()
-                setForm({id:'', name:''})                
-                toast.success(res?.message)        
-            }).catch(err=>{
-                console.log(err);
-                const error = err?.data?.errors
-                if(!error)
-                    toast.error(err?.data?.error || t("Something went wrong please try again later"))        
-                else        
-                    setError(error)
-            })
+  useEffect(() => {
+    setName(role?.name || '');
+  }, [role, open]);
 
-        }else{
-            addRole({form:getAsFormData()})
-            .unwrap()
-            .then(res=>{
-                handleToggler()
-                setForm({id:'', name:''})
-                toast.success(res?.message)
-            }).catch(err=>{
-                console.log(err);
-                const error = err?.data?.errors
-                if(!error)
-                    toast.error(err?.data?.error ||t("Something went wrong please try again later"))        
-                else        
-                    setError(error)
-            })
-        }
+  const isInvalid = useMemo(() => name.trim().length < 3, [name]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleSave = async () => {
+    if (isInvalid) {
+      toast.error(t('Please enter the role name correctly'));
+      return;
     }
-        const isSaveDisabled = !form.name.trim() || form.name.length > 10 || form.name.length<3;
 
-    return (
-        <Modal
-            handleToggler={handleToggler}
-            open={open}
-        >
-            <div className="w-[50vw] my-8">
-                <Input
-                    label={t("Role Name")}
-                    labelId='name'
-                    type='text'
-                    value={form.name}
-                    onChange={onChange}
-                    max_length={10} 
-                    errors={error}
-                    placeholder={t("Role Name")}
-                    required
-                />
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-                <Button onClick={handleRole} variant='primary' title={t("Save")} isLoading={isLoading||editLoading} disabled={isSaveDisabled} />
-                <Button 
-                    variant='secondary'
-                    onClick={handleToggler}
-                    isLoading={false}
-                    title={t("Cancle")}
-                />
-                
+    const form = new FormData();
+    form.append('name', name.trim());
+
+    try {
+      if (role?.id) {
+        await editRole({ id: role.id, form }).unwrap();
+        toast.success(t('Role has changed successfully'));
+      } else {
+        await addRole({ form }).unwrap();
+        toast.success(t('Role added successfully'));
+      }
+      onClose();
+    } catch (error: any) {
+      toast.error(error?.data?.error || t('Something went wrong please try again later'));
+    }
+  };
+
+  return (
+    <Modal open={open} handleToggler={onClose} title={isEditingRole ? t('Edit Role') : t('Add Role')}>
+      <div className="space-y-6">
+        <FloatingInput
+          labelId="name"
+          type="text"
+          label={t('Role Name')}
+          value={name}
+          onChange={handleChange}
+          required
+        />
+
+        <div className="flex justify-end gap-3">
+          <Button
+            title={t('Cancle')}
+            variant="secondary-outline"
+            onClick={onClose}
+            className="max-w-[140px]"
+            fontBold={false}
+          />
+          <Button
+            title={t('Save')}
+            variant="primary"
+            onClick={handleSave}
+            disabled={isInvalid || isAdding || isEditing}
+            isLoading={isAdding || isEditing}
+            icon={<Save className="h-4 w-4" />}
+            className="max-w-[140px]"
+          />
         </div>
-        </Modal>
-    )
-}
+      </div>
+    </Modal>
+  );
+};
 
-export default RoleFormModal
+export default RoleFormModal;

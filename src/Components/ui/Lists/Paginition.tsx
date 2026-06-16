@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { to_int_or_default } from '../../utils/helper';
 import { useSearchParams } from 'react-router-dom';
+import { to_int_or_default } from '../../utils/helper';
 
 interface Props {
   totalPages: number | null;
@@ -8,21 +8,25 @@ interface Props {
 
 const Paginition = ({ totalPages }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  let size = to_int_or_default(searchParams.get('size'));
-  let page = to_int_or_default(searchParams.get('page'));
+  // const size = to_int_or_default(searchParams.get('size'));
+  const page = to_int_or_default(searchParams.get('page'));
+
+  const rawPage = searchParams.get('page');
+  const rawSize = searchParams.get('size');
 
   useEffect(() => {
-    if (!page) {
-      page = 1;
-      searchParams.set('page', '1');
-      setSearchParams(searchParams);
+    const missingPage = !rawPage;
+    const missingSize = !rawSize;
+
+    if (missingPage || missingSize) {
+      const next = new URLSearchParams(searchParams);
+      if (missingPage) next.set('page', '1');
+      if (missingSize) next.set('size', '10');
+      setSearchParams(next, { replace: true });
     }
-    if (!size) {
-      size = 10;
-      searchParams.set('size', '10');
-      setSearchParams(searchParams);
-    }
-  }, [size, page]);
+  // Only run when the raw string values change, not on every render
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rawPage, rawSize]);
 
   if (!totalPages || totalPages <= 1) return null;
 

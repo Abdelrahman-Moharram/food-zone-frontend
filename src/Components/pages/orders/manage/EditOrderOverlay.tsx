@@ -26,7 +26,7 @@ interface Props {
 }
 
 const EditOrderOverlay = ({ order, onClose }: Props) => {
-  const { data: menuData } = useGetValidMenuDetailsQuery(undefined);
+  const { data: menuData }                = useGetValidMenuDetailsQuery(undefined);
   const [updateOrderItems, { isLoading }] = useUpdateOrderItemsMutation();
 
   // Initialise editable items from current order meals

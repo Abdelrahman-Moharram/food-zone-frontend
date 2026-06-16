@@ -1,86 +1,93 @@
+import { ChangeEvent, useEffect, useState } from 'react';
+import { AlertTriangle, Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import Button from '../../../../Components/ui/Common/Button';
+import SelectInput from '../../../../Components/ui/Forms/SelectInput';
+import Modal from '../../../../Components/ui/Modals/Modal';
+import { useDeleteRoleMutation, useGetRolesAsSelectListQuery } from '../../../../redux/api/rolesApi';
+import type { RoleItem } from './RoleTypes';
 
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { toast } from 'react-toastify'
-import { SelectInput } from '../../../../Components/ui/Forms'
-import Button from '../../../../Components/ui/Common/Button'
-import { baseType } from '../../../../Components/ui/Types/Others'
-import { useDeleteRoleMutation, useGetRolesAsSelectListQuery, useRoleDetailsMutation } from '../../../../redux/api/rolesApi'
-import { Modal } from '../../../../Components/ui/Modals'
-import { useTranslation } from "react-i18next";
-
-interface Props{
-    handleToggler:()=>void,
-    open:boolean,
-    roleId:string
+interface Props {
+  open: boolean;
+  role: RoleItem | null;
+  onClose: () => void;
 }
-const DeleteRoleModal = ({open, handleToggler, roleId}:Props) => {
 
-    const {t} = useTranslation();
-    const baseForm = {
-      'alter_role':''
-    }
-    const [form, setForm] = useState(baseForm)
-    const {data} = useGetRolesAsSelectListQuery({exclude:roleId})
-    const [getRoleFormData, {data:role_data}] = useRoleDetailsMutation()
-    const [deleteRole, {isLoading}] = useDeleteRoleMutation()
+const DeleteRoleModal = ({ open, role, onClose }: Props) => {
+  const { t } = useTranslation();
+  const [alterRole, setAlterRole] = useState('');
+  const { data } = useGetRolesAsSelectListQuery({ exclude: role?.id || '' }, { skip: !open || !role?.id });
+  const [deleteRole, { isLoading }] = useDeleteRoleMutation();
+  const roles = data?.roles || [];
 
-    const selectChange = (e: ChangeEvent<HTMLSelectElement>)=>{
-      const { name, value } = e.target;
-      setForm({ ...form, [name]: value });
-    }
-    useEffect(()=>{       
-      if(roleId)
-        getRoleFormData({id:roleId})  
-      setForm(baseForm)      
-  }, [roleId, open])
+  useEffect(() => {
+    if (open) setAlterRole('');
+  }, [open, role?.id]);
 
-  const submitDeleteRole = () =>{
-    
-    if(roleId){
-      deleteRole({roleId, alter_role: form.alter_role})
-        .then(res=>{
-          handleToggler()
-          toast.success(res?.data?.message)
-        })
-        .catch(err=>{
-          toast.error(err?.data?.message || t("Something went wrong please try again later"))
-        })
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setAlterRole(event.target.value);
+  };
+
+  const handleDelete = async () => {
+    if (!role?.id || !alterRole) {
+      toast.error(t('You should choose an alter role to move current role users to'));
+      return;
     }
-  }
-  
+
+    try {
+      await deleteRole({ roleId: role.id, alter_role: alterRole }).unwrap();
+      toast.success(t('role has been deleted succssefully!'));
+      onClose();
+    } catch (error: any) {
+      toast.error(error?.data?.error || t('Something went wrong please try again later'));
+    }
+  };
+
   return (
-    <Modal
-      open={open}
-      handleToggler={handleToggler}
-    >
-      <div className="space-y-5">
-        <div className='text-red-500 text-lg font-semibold'>{t("Are you sure u want to delete")} <span className='font-semibold'>"{role_data?.role?.name}"</span></div>
-        <p className=''>{t("You should choose an alter role to move current role users to")}</p>
-
-        <div className="w-full">
-          <SelectInput
-            labelId='alter_role'
-            label={t("Alter Role")}
-            onChange={selectChange}
-            value={form?.alter_role}
-            emptyoption
-            options={data?.roles?.map((i:baseType)=>({label:i.name, value:i.id}))}
-          />
+    <Modal open={open} handleToggler={onClose} title={t('Delete Role')}>
+      <div className="space-y-6">
+        <div className="rounded-lg border border-red-100 bg-red-50 p-4 text-red-700">
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+            <div>
+              <h3 className="font-bold">
+                {t('Are you sure u want to delete')} "{role?.name}"
+              </h3>
+              <p className="mt-1 text-sm">{t('You should choose an alter role to move current role users to')}</p>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-2 gap-2">
-            <Button variant='red' title={t("Delete")} onClick={submitDeleteRole} icon={<FaTrash />} isLoading={isLoading} />
-            <Button 
-              className='w-full py-2 rounded-lg border border-secondary text-center hover:bg-secondary hover:text-white transition-all'
-              onClick={handleToggler}
-              isLoading={false}
-              title={t("Cancle")}
-              variant='secondary'
-            />
+
+        <SelectInput labelId="alter_role" label={t('Alter Role')} value={alterRole} onChange={handleChange} required>
+          {roles.map((item: RoleItem) => (
+            <option value={item.id} key={item.id}>
+              {item.name}
+            </option>
+          ))}
+        </SelectInput>
+
+        <div className="flex justify-end gap-3">
+          <Button
+            title={t('Cancle')}
+            variant="secondary-outline"
+            onClick={onClose}
+            className="max-w-[140px]"
+            fontBold={false}
+          />
+          <Button
+            title={t('Delete')}
+            variant="red"
+            onClick={handleDelete}
+            disabled={!alterRole || isLoading}
+            isLoading={isLoading}
+            icon={<Trash2 className="h-4 w-4" />}
+            className="max-w-[140px]"
+          />
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default DeleteRoleModal
+export default DeleteRoleModal;

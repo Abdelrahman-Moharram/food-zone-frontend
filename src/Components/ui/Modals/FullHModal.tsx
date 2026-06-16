@@ -20,7 +20,7 @@ export default function FullHModal({children, open, handleToggler}:Props) {
             className="fixed top-0 bottom-0 right-0 left-0 bg-black/20 z-[4]"
           >
           </div>
-          <div className=" w-fit h-max max-h-full overflow-y-auto rounded-md shadow-md bg-container z-[5] min-w-[50%] max-w-[80%] fixed left-1/2 -translate-x-1/2 top-0">
+          <div className=" w-fit h-max max-h-full overflow-y-auto rounded-3xl p-1.5 default-shadow bg-container z-[5] min-w-[50%] max-w-[80%] fixed left-1/2 -translate-x-1/2 top-10">
                 {children}
           </div>
         </>
