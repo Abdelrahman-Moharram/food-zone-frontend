@@ -2,44 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
-  font-family: 'Bahij_TheSansArabic';
-  src: url('/fonts/bahij_TheSansArabic.ttf') format('truetype');
+  font-family: "Bahij_TheSansArabic";
+  src: url("/fonts/bahij_TheSansArabic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-
-body{
-  --primary:#00A8E8;
-  font-family: 'Bahij_TheSansArabic';
+body {
+  font-family: "Bahij_TheSansArabic";
   background-size: cover;
   background-attachment: fixed;
-  
 }
 
 .light {
-  
   --background: 250, 252, 255, 1;
 
   --container: 255, 255, 255;
 
   --border: 222, 221, 226;
   --card: 231, 240, 255;
-  
-  
+
   --color: 0, 0, 0;
   --side-nav: 49, 49, 49, 1;
-  --negative-color:255, 255, 255;
-
+  --negative-color: 255, 255, 255;
 }
-.tw-blur, .blur, .blur-sm, .blur-md, .blur-lg {
+.tw-blur,
+.blur,
+.blur-sm,
+.blur-md,
+.blur-lg {
   filter: none !important; /* Removes any blur effect */
 }
 .dark {
-  --background:37, 35, 41;
+  --background: 37, 35, 41;
 
   --border: 62, 59, 69;
   --card: 25, 24, 27;
@@ -49,40 +46,40 @@ body{
   --copy-secondary: 164, 159, 172;
 
   --color: 255, 255, 255;
-  --negative-color:0, 0, 0;
+  --negative-color: 0, 0, 0;
   background: rgba(var(--background));
-  --side-nav: 49, 49, 49
-
+  --side-nav: 49, 49, 49;
 }
-.sideNav{
-  transition: all ease .4s;
+.sideNav {
+  transition: all ease 0.4s;
 }
-.sideNav .sidenav-text{
+.sideNav .sidenav-text {
   overflow-x: hidden;
   width: 0px;
-  transition: all ease .4s;
-
+  transition: all ease 0.4s;
 }
 
-.default-shadow-xl{
+.default-shadow-xl {
   box-shadow: 0px 0px 10px #000;
 }
 
-.default-shadow-lg{
+.default-shadow-lg {
   box-shadow: 0px 0px 7px #000;
 }
 
-.default-shadow-md{
+.default-shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-colored:
+    0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow:
+    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+    var(--tw-shadow);
   border-width: 1px;
 }
 
-.default-shadow-sm{
+.default-shadow-sm {
   box-shadow: 0px 0px 3px #000;
 }
-
 
 .truncate-2 {
   display: -webkit-box;
@@ -92,8 +89,14 @@ body{
 }
 
 @keyframes fadein {
-  from {width: 60px; height: 60px;}
-  to {width: 300px; height: auto;}
+  from {
+    width: 60px;
+    height: 60px;
+  }
+  to {
+    width: 300px;
+    height: auto;
+  }
 }
 
 .inputImage {
@@ -104,13 +107,11 @@ body{
 .fade-in {
   animation: fadein 0.35s ease forwards;
 }
-.preview-image:hover div{
+.preview-image:hover div {
   display: flex !important;
 }
 
-
-
-.OverLayDetailsContainer{
+.OverLayDetailsContainer {
   background-color: #fff;
   position: fixed;
   margin: 10px;
@@ -122,50 +123,43 @@ body{
   overflow: auto;
   border-radius: 10px;
   padding: 20px;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
-.swiper-pagination{
+.swiper-pagination {
   position: relative !important;
   margin-top: 40px;
 }
-.showOverLayDetails{
-  top:0px;
+.showOverLayDetails {
+  top: 0px;
 }
-.hideOverLayDetails{
-  top:100%;
+.hideOverLayDetails {
+  top: 100%;
 }
-
-
 
 .swiper-pagination-bullet-active {
-  background: var(--primary) !important; 
-  color: var(--primary); 
+  background: var(--primary) !important;
+  color: var(--primary);
 
   width: 20px !important;
   height: 10px;
   border-radius: 8px !important;
 }
-.swiper-button-next{
+.swiper-button-next {
   margin-left: -10px;
 }
-.swiper-button-prev{
+.swiper-button-prev {
   margin-right: -10px;
 }
-.swiper-button-next, .swiper-button-prev {
-  color: #BDBFBF !important ; 
+.swiper-button-next,
+.swiper-button-prev {
+  color: #bdbfbf !important ;
 }
 
 /* Optional: Change hover color */
-.swiper-button-next:hover, .swiper-button-prev:hover {
-  color: #BDBFBF !important ; 
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #bdbfbf !important ;
 }
-
-
-
-
-
-
-
 
 /*Scroll bar nav*/
 .side-nav-ul::-webkit-scrollbar {
@@ -176,7 +170,7 @@ body{
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 body::-webkit-scrollbar {
@@ -186,26 +180,21 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: var(--primary);
 }
 
-
-
-.overlay-fn-keys{
+.overlay-fn-keys {
   position: fixed;
   background-color: #fff;
-  transition: all .5s ease .3s;
+  transition: all 0.5s ease 0.3s;
 }
-.overlay-fn-keys-active{
+.overlay-fn-keys-active {
   top: 78%;
 }
-.overlay-fn-keys-hidden{
+.overlay-fn-keys-hidden {
   top: 101%;
 }
-
-
-
 
 .select-wrapper {
   position: relative !important;
@@ -213,23 +202,22 @@ body::-webkit-scrollbar-thumb {
 
 .select-wrapper::after {
   content: "▼" !important;
-  top: 6px  !important;
+  top: 6px !important;
   right: 10px !important;
   position: absolute !important;
 }
 
-
-.bg-login-container{
-  animation: scale .3s linear;
+.bg-login-container {
+  animation: scale 0.3s linear;
   background-size: cover;
   background-attachment: fixed;
 }
 @keyframes scale {
-  from{
-      transform: scale(.5);
+  from {
+    transform: scale(0.5);
   }
-  to{
-      transform: scale(1);
+  to {
+    transform: scale(1);
   }
 }
 
@@ -242,7 +230,7 @@ body::-webkit-scrollbar-thumb {
   top: 0;
   bottom: 0;
   right: 0;
-  height: 100vh; 
-  width: 100vw;  
-  z-index: -1;   
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
 }
