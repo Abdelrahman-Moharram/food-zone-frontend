@@ -84,7 +84,7 @@ const Input = ({
           className={cn(
             "block text-sm font-medium mb-1.5 transition-colors duration-150",
             hasErrors
-              ? "text-rose-500 dark:text-rose-400"
+              ? "text-rose-500 "
               : isFocused
                 ? "text-primary font-semibold"
                 : "text-copy-primary/90"
@@ -97,7 +97,7 @@ const Input = ({
 
       <div
         className={cn(
-          "relative flex items-center w-full rounded-xl border bg-card/80 transition-all duration-200 shadow-xs backdrop-blur-xs",
+          "relative flex items-center w-full rounded-lg border bg-card/80 transition-all duration-200 shadow-xs backdrop-blur-xs",
           hasErrors
             ? "border-rose-500/80 focus-within:border-rose-500 focus-within:ring-2 focus-within:ring-rose-500/20"
             : isFocused
@@ -127,7 +127,7 @@ const Input = ({
           placeholder={placeholder}
           maxLength={max_length}
           className={cn(
-            "w-full py-2.5 px-3.5 bg-transparent text-sm sm:text-base text-copy-primary placeholder:text-copy-secondary/50 outline-none rounded-xl disabled:cursor-not-allowed",
+            "w-full py-2.5 px-3.5 bg-transparent text-sm sm:text-base text-copy-primary placeholder:text-copy-secondary/50 outline-none rounded-lg disabled:cursor-not-allowed",
             type === "password" && "pe-11",
             inputClassName
           )}

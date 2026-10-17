@@ -4,11 +4,11 @@ import BaseOverlay from './BaseOverlay';
 
 
 interface Props{
-    children: React.ReactNode;
-    handleToggler:()=>void;
-    open: boolean;
+    children    : React.ReactNode;
+    handleOpen  : ()=>void;
+    open        : boolean;
 }
-export default function BaseModal({children, open, handleToggler}:Props) {
+export default function BaseModal({children, open, handleOpen}:Props) {
 
 
   return (
@@ -17,10 +17,10 @@ export default function BaseModal({children, open, handleToggler}:Props) {
       open?
         <>
           <BaseOverlay
-            handleToggler={handleToggler}
+            handleOpen={handleOpen}
           />
-          <div className="min-w-[50%] z-20 flex items-center pt-10 justify-center absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-full h-full rounded-md shadow-md overflow-hidden bg-container z-3 ">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto pointer-events-none">
+            <div className="pointer-events-auto w-full max-w-2xl max-h-[90vh] flex flex-col rounded-2xl shadow-2xl border border-border/80 overflow-hidden bg-container animate-modal-in transition-all duration-300 ease-out">
                 {children}
             </div>
           </div>

@@ -43,7 +43,7 @@ const SideModal = ({
 
   return (
     <div>
-      <BaseOverlay handleToggler={onClose} isOpen={isOpen} />
+      <BaseOverlay handleOpen={onClose} isOpen={isOpen} />
 
       <div
         role="dialog"
@@ -59,13 +59,13 @@ const SideModal = ({
           fixed top-0 bottom-0 end-0 z-50
           w-full max-w-full
           md:w-fit md:min-w-[var(--sm-min-w)] md:max-w-[var(--sm-max-w)]
-          bg-card text-copy-primary border-s border-border shadow-2xl
+          bg-container text-color border-s border-border/80 shadow-2xl overflow-y-auto
           transition-transform duration-300 ease-in-out will-change-transform
           ${isOpen ? 'translate-x-0' : 'ltr:translate-x-full rtl:-translate-x-full'}
         `}
       >
         <button 
-            className="p-3 rounded-full hover:bg-gray-200 transition-all"
+            className="p-2 m-3 rounded-xl bg-card hover:bg-gray-200/80 text-gray-500 hover:text-color border border-border/50 transition-all active:scale-95 text-base flex items-center justify-center"
             onClick={onClose}
         >
             <IoClose />

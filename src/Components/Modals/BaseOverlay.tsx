@@ -2,18 +2,16 @@
 import React from 'react'
 
 const BaseOverlay = ({
-  handleToggler,
+  handleOpen,
   isOpen,
 }: {
-  handleToggler?: () => void
+  handleOpen?: () => void
   isOpen?: boolean
 }) => {
   return (
     <div
-      onClick={handleToggler}
-      className={`fixed inset-0 z-40 bg-shared-theme-copy/60
-        transition-opacity duration-300 ease-in-out
-        ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+      onClick={handleOpen}
+      className="fixed inset-0 z-40 bg-black/45 backdrop-blur-xs animate-overlay-in transition-opacity duration-300 ease-out"
     />
   )
 }

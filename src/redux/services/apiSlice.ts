@@ -11,7 +11,7 @@ import notification from '../../Components/Notifications';
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${import.meta.env.VITE_BASE_URL}/api/`,
+  baseUrl: `${import.meta.env.VITE_BASE_URL}/api`,
   credentials: 'include',
   headers: { 'Accept-Language': localStorage.getItem("lang") || 'en' }
 });

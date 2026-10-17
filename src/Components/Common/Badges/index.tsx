@@ -39,7 +39,7 @@ const dotStyles: Record<BadgeVariant, string> = {
 }
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-    ({ variant = 'default', dot = true, className = '', children, ...props }, ref) => {
+    ({ variant = 'default', dot = false, className = '', children, ...props }, ref) => {
         return (
             <span
                 ref={ref}

@@ -42,7 +42,7 @@ const Layout = ({ children }: { children?: React.ReactNode }) => {
                      - flex-1: takes remaining width
                      - h-full + overflow-y-auto: Independent scrolling for content
                 */}
-                <div className="flex-1 h-full overflow-y-auto w-full border rounded-lg bg-gray-50"> 
+                <div className="flex-1 h-full overflow-y-auto w-full border rounded-lg bg-container/40"> 
                     <div className=" min-h-full ">
                         <Suspense fallback={<div>Loading...</div>}>
                             {children || <Outlet />}

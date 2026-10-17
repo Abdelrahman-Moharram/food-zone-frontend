@@ -190,12 +190,25 @@
   "Resend Code": "Resend Code",
   "Verification code sent successfully": "Verification code sent successfully",
   "Complete verification to sign in.": "Complete verification to sign in.",
-  "Invalid credentials": "Invalid credentials"
-
-  
-  
-
-
-
-
+  "Invalid credentials": "Invalid credentials",
+  "default": "Default",
+  "choose a good title for the menu eg: ( Sohour Menu, Deserts, ...etc)": "Choose a good title for the menu e.g. (Sohour Menu, Desserts, Hall, etc.)",
+  "Describe what is this menu for": "Describe what is this menu for",
+  "Submit": "Save Menu",
+  "Important Guidelines Before Adding a Menu": "Important Guidelines Before Adding a Menu",
+  "Please review the following rules to ensure menus are created effectively and avoid duplicate or unnecessary menus.": "Please review the following rules to ensure menus are created effectively and avoid duplicate or unnecessary menus.",
+  "Only One Menu Appears to Customers": "Only One Menu Appears to Customers",
+  "Customers will only see a single menu at a time, which is the menu currently set as the default.": "Customers will only see a single menu at a time, which is the menu currently set as the default.",
+  "Only One Default Menu Allowed": "Only One Default Menu Allowed",
+  "You can only designate one menu as the active default menu for your store at any given time.": "You can only designate one menu as the active default menu for your store at any given time.",
+  "Maximum Limit of 4 Menus": "Maximum Limit of 4 Menus",
+  "Your restaurant can have at most 4 menus in total (e.g. Dine-in / Hall, Takeaway, Desserts, Sohour).": "Your restaurant can have at most 4 menus in total (e.g. Dine-in / Hall, Takeaway, Desserts, Sohour).",
+  "Same Items, Different Prices": "Same Items, Different Prices",
+  "Multiple menus are meant for the same items with different prices (such as Dine-in hall prices vs. takeaway or delivery), not for splitting items needlessly.": "Multiple menus are meant for the same items with different prices (such as Dine-in hall prices vs. takeaway or delivery), not for splitting items needlessly.",
+  "Important Note": "Important Note",
+  "Avoid creating duplicate menus with identical prices or items, as they provide no benefit and will not be displayed to customers.": "Avoid creating duplicate menus with identical prices or items, as they provide no benefit and will not be displayed to customers.",
+  "1 Active Menu": "1 Active Menu",
+  "1 Default": "1 Default",
+  "Max 4 Menus": "Max 4 Menus",
+  "Price Differentiation": "Price Differentiation"
 }

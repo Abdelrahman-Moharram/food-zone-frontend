@@ -1,6 +1,6 @@
 import { apiSlice } from "../services/apiSlice";
 
-const base_url = 'roles/'
+const base_url = '/roles'
 const rolesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder)=>({
         getRolesList: builder.query({

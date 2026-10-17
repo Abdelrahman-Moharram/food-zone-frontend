@@ -2,7 +2,7 @@ import './index.css'
 import "./i18n";
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import CustomProvider from './redux/provider.tsx'
 import Layout from './Pages/Layout.tsx'
@@ -14,43 +14,62 @@ import AuthenticatedOrRedirect from './Components/Guards/AuthenticatedOrRedirect
 import NotAuthenticatedOrRedirect from './Components/Guards/NotAuthenticatedOrRedirect.tsx';
 
 
-const router = createBrowserRouter ([
+
+import { IsAllowedPermissionOrRedirect } from './Components/Guards/IsAllowedPermission.tsx';
+import Menus from './Pages/Menus/Menus.tsx';
+
+
+const router = createBrowserRouter([
   {
-    path:"/",
+    path: "/",
     element: <Layout />,
-    errorElement:(
+    errorElement: (
       <Layout>
         <NotFound />
       </Layout>
     ),
-    children:[
+    children: [
+      {
+        path: '',
+        element: <Home />
+      },
+      {
+        path: 'menus',
+        // element : (
+        //   <IsAllowedPermissionOrRedirect permission='permissions.restaurants.menus'>
+        //     <Outlet />
+        //   </IsAllowedPermissionOrRedirect>
+        // ),
+        children: [
           {
-            path:'',
-            element:<Home />
-          }
+            index: true,
+            element: <Menus />
+          },
         ]
-      },
+      }
+    ]
+  },
   {
-    path:'/auth',
-    children:[
+    path: '/auth',
+    children: [
       {
-        path:"logout",
+        path: "logout",
         element:
-        <AuthenticatedOrRedirect>
-          <Logout />
-        </AuthenticatedOrRedirect>
+          <AuthenticatedOrRedirect>
+            <Logout />
+          </AuthenticatedOrRedirect>
       },
       {
-        path:"login",
+        path: "login",
         element:
-        <NotAuthenticatedOrRedirect>
-          <Login />
-        </NotAuthenticatedOrRedirect>
+          <NotAuthenticatedOrRedirect>
+            <Login />
+          </NotAuthenticatedOrRedirect>
       },
 
     ]
   },
-      
+
 ])
 
 createRoot(document.getElementById('root')!).render(

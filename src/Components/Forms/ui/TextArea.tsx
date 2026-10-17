@@ -92,7 +92,7 @@ const TextArea = ({
 
       <div
         className={cn(
-          "relative w-full rounded-xl border bg-card/80 transition-all duration-200 shadow-xs backdrop-blur-xs",
+          "relative w-full rounded-lg border bg-card/80 transition-all duration-200 shadow-xs backdrop-blur-xs",
           hasErrors
             ? "border-rose-500/80 focus-within:border-rose-500 focus-within:ring-2 focus-within:ring-rose-500/20"
             : isFocused
@@ -114,7 +114,7 @@ const TextArea = ({
           disabled={disabled}
           maxLength={max_length}
           className={cn(
-            "w-full py-2.5 px-3.5 bg-transparent text-sm sm:text-base text-copy-primary placeholder:text-copy-secondary/50 outline-none rounded-xl resize-y disabled:cursor-not-allowed",
+            "w-full py-2.5 px-3.5 bg-transparent text-sm sm:text-base text-copy-primary placeholder:text-copy-secondary/50 outline-none rounded-lg resize-y disabled:cursor-not-allowed",
             inputClassName
           )}
         />

@@ -16,17 +16,17 @@ interface Props{
 
 const DeleteModal = ({title, open, handleClose, children, deleteAction, isLoading, id}:Props) => {
   return (
-    <BaseModal open={open} handleToggler={handleClose}  >
-        <div className="min-w-[50vw] flex justify-between items-center ">
-            <h3 className='font-bold'>{title}</h3>
-            <div onClick={handleClose} className="cursor-pointer p-3 rounded-full hover:bg-gray-100"><IoClose /></div>
+    <BaseModal open={open} handleOpen={handleClose}  >
+        <div className="flex justify-between items-center px-6 py-4 border-b border-border/70 bg-card">
+            <h3 className="font-bold text-base text-color tracking-wide">{title}</h3>
+            <div onClick={handleClose} className="cursor-pointer p-1.5 rounded-xl text-gray-500 hover:text-color hover:bg-container border border-border/50 transition-all duration-150 active:scale-95 flex items-center justify-center text-base"><IoClose /></div>
         </div>
-        <p className="text-red-500 my-4">
+        <p className="px-6 py-5 text-sm text-gray-600 leading-relaxed font-normal">
             {children}
         </p>
         <button
             onClick={()=>deleteAction(id)}
-            className="w-full justify-center flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-red-500 bg-red-100 hover:bg-red-500 hover:text-white"
+            className="w-[calc(100%-3rem)] mx-6 mb-6 justify-center flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white bg-rose-600 hover:bg-rose-700 active:scale-[0.98] transition-all duration-200 shadow-xs hover:shadow-md hover:shadow-rose-600/20"
         >
             
             {isLoading ?  

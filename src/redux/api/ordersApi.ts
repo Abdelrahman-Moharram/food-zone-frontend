@@ -1,6 +1,6 @@
 import { apiSlice } from "../services/apiSlice";
 
-const base_url = 'orders/'
+const base_url = '/orders'
 
 const ordersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

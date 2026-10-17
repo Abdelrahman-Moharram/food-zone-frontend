@@ -4,10 +4,10 @@ import React from 'react';
 
 interface Props{
     children: React.ReactNode;
-    handleToggler:()=>void;
+    handleOpen:()=>void;
     open: boolean;
 }
-export default function FullHModal({children, open, handleToggler}:Props) {
+export default function FullHModal({children, open, handleOpen}:Props) {
 
 
   return (
@@ -16,11 +16,11 @@ export default function FullHModal({children, open, handleToggler}:Props) {
       open?
         <>
           <div 
-            onClick={handleToggler}
-            className="fixed top-0 bottom-0 right-0 left-0 bg-black/20 z-[4]"
+            onClick={handleOpen}
+            className="fixed inset-0 bg-black/45 backdrop-blur-xs z-40 animate-overlay-in transition-opacity duration-300 ease-out"
           >
           </div>
-          <div className=" w-fit h-max max-h-full overflow-y-auto rounded-md shadow-md bg-container z-[5] min-w-[50%] max-w-[80%] fixed left-1/2 -translate-x-1/2 top-0">
+          <div className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] overflow-y-auto rounded-2xl shadow-2xl border border-border/80 bg-container animate-modal-in transition-all duration-300 ease-out">
                 {children}
           </div>
         </>
